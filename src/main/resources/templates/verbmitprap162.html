@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <p>Verb with a prepositional case</p>
+</div>
+<div>
+    <p>Verben mit präposition + Dativ</p>
+    <p>aus, bei, mit, nach, seit, von, unter, zu</p>
+</div>
+<div>
+    <p>Подставьте верный предлог</p>
+    <form action="/deutsch/162/answer" method="post">
+        <div th:each="question: ${questions}">
+            <label th:for="${question.getNumber()}" th:text="${question.getQuestionText()}">
+            </label>
+            <input th:id="${question.getNumber()}" type="text" name="answers" required>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+</body>
+</html>
