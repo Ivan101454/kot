@@ -1,12 +1,13 @@
 package by.ivan101454.kot.service;
 
 import by.ivan101454.kot.dto.Question;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-
+@Slf4j
 @Service
 public class ExerciseService {
 
@@ -34,6 +35,7 @@ public class ExerciseService {
     }
 
     public List<Question> findAllQuestion() {
+        log.info("create question");
         return createQuestions();
     }
 
