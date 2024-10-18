@@ -2,9 +2,12 @@ spring:
   application:
     name: kot
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: jdbc:postgresql://localhost:5432/demo
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
   jpa:
     show-sql: true
+    hibernate:
+      ddl-auto: create
+
