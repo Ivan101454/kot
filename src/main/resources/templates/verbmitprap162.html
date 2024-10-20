@@ -15,7 +15,8 @@
 <div>
     <p>Подставьте верный предлог</p>
     <form action="/deutsch/162/answer" method="post">
-        <div th:each="question: ${questions}">
+        <div th:each="exercise: ${exercises}">
+            <p th:text="${exercise.getQuestions().stream()}"></p>
             <label th:for="${question.getNumber()}" th:text="${question.getQuestionText()}">
             </label>
             <input th:id="${question.getNumber()}" type="text" name="answers" required>

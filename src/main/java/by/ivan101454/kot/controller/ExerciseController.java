@@ -1,6 +1,7 @@
 package by.ivan101454.kot.controller;
 
 import by.ivan101454.kot.dto.Question;
+import by.ivan101454.kot.entity.Exercise;
 import by.ivan101454.kot.service.ExerciseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -24,9 +25,9 @@ public class ExerciseController {
 //        return "verbmitprap162";
 //    }
     @GetMapping(path = "/tasks")
-    public String getQuestions(Model model) {
-        List<Question> allQuestion = exerciseService.findAllQuestion();
-        model.addAttribute("questions", allQuestion);
+    public String getQuestions(Model model, Integer section) {
+        List<Exercise> exercises = exerciseService.findAllExerciseBySection(section);
+        model.addAttribute("exercises", exercises);
         return "verbmitprap162";
     }
 
