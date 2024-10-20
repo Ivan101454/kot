@@ -1,7 +1,9 @@
 package by.ivan101454.kot.service;
 
-import by.ivan101454.kot.dto.Question;
+import by.ivan101454.kot.dto.ExerciseDto;
+import by.ivan101454.kot.dto.QuestionDto;
 import by.ivan101454.kot.entity.Exercise;
+import by.ivan101454.kot.mapper.ExerciseCreateEditMapper;
 import by.ivan101454.kot.repository.ExerciseImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -11,30 +13,48 @@ import java.util.Optional;
 @Slf4j
 @Service
 public class ExerciseService {
-    ExerciseImpl exercise;
+    ExerciseImpl exerciseImpl;
+    ExerciseCreateEditMapper exerciseCreateEditMapper;
 
-    public List<Question> createQuestions() {
+    public List<QuestionDto> createQuestions() {
         return List.of(
-                Question.builder().number(1)
+                QuestionDto.builder().number(1)
                         .questionText("abhängen")
                         .answerText("von")
                         .answerExampleText("Alles hängt vom Wetter").build(),
-                Question.builder().number(2)
+                QuestionDto.builder().number(2)
                         .questionText("anfangen")
                         .answerText("mit")
                         .answerExampleText("Wann fangt ihr mit dem Project an").build(),
-                Question.builder().number(3)
+                QuestionDto.builder().number(3)
                         .questionText("beginnen")
                         .answerText("mit")
                         .answerExampleText("Wann beginnt ihr mit der Arbeit").build());
 
     }
     public Optional<Exercise> findExerciseById(Long id) {
-        return exercise.findById(id);
+        return exerciseImpl.findById(id);
     }
 
     public List<Exercise> findAllExerciseBySection(int numberOfSection) {
-        return exercise.findAllBySectionNumber(numberOfSection);
+        return exerciseImpl.findAllBySectionNumber(numberOfSection);
+    }
+
+    public void createExercise(Exercise exercise) {
+        exerciseImpl.save(exercise);
+    }
+
+    public void createExercises(List<Exercise> exercisesList) {
+        exerciseImpl.saveAll(exercisesList);
+    }
+
+    public void deleteExercise(Long idExercise) {
+        exerciseImpl.deleteById(idExercise);
+    }
+
+    public Optional<Exercise> updateExercise(Long idExercise, ExerciseDto exerciseDto) {
+        return Optional.of(exerciseImpl.findById(idExercise).map(e -> exerciseCreateEditMapper.map(exerciseDto, e))
+                .map(exerciseImpl::save)).orElseThrow(() -> new RuntimeException("Нет обновления"));
     }
 
 

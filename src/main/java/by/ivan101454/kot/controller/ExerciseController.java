@@ -1,6 +1,5 @@
 package by.ivan101454.kot.controller;
 
-import by.ivan101454.kot.dto.Question;
 import by.ivan101454.kot.entity.Exercise;
 import by.ivan101454.kot.service.ExerciseService;
 import lombok.RequiredArgsConstructor;
